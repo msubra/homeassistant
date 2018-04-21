@@ -1,0 +1,7 @@
+  GetTemperature:  # Intent type
+    speech:
+      text: Hi there
+    action:
+      service: notify.notify
+      data_template:
+        message: Hello from an intent!

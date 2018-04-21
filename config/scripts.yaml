@@ -1,0 +1,12 @@
+set_nest_away:
+  sequence:
+  - data:
+      home_mode: away
+    service: nest.set_mode
+  alias: set_nest_away
+set_nest_home:
+  sequence:
+  - data:
+      home_mode: home
+    service: nest.set_mode
+  alias: set_nest_home

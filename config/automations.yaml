@@ -1,0 +1,72 @@
+- action:
+  - data:
+      entity_id: climate.basement
+      operation_mode: 'off'
+    service: climate.set_operation_mode
+  alias: turn_off_nest_basement_after_10pm
+  condition: []
+  id: '1517794643416'
+  trigger:
+  - at: '22:00:00'
+    platform: time
+- action:
+  - data:
+      entity_id: climate.basement
+      operation_mode: heat
+    service: climate.set_operation_mode
+  - data:
+      entity_id: climate.basement
+      operation_mode: heat
+      temperature: '76'
+    service: climate.set_temperature
+  alias: turn_on_nest_basement_morning_5am
+  condition: []
+  id: '1517794643417'
+  trigger:
+  - at: 05:00:00
+    platform: time
+- action:
+  - data:
+      entity_id: climate.upstairs
+      operation_mode: 'off'
+    service: climate.set_operation_mode
+  alias: turn_off_nest_upstairs_morning
+  condition: []
+  id: '1517796546532'
+  trigger:
+  - at: 07:00:00
+    platform: time
+- action:
+  - data:
+      entity_id: climate.upstairs
+      operation_mode: cool
+    service: climate.set_operation_mode
+  alias: turn_on_nest_upstairs_after_9pm
+  condition: []
+  id: '1517796546531'
+  trigger:
+  - at: '21:10:00'
+    platform: time
+- action:
+  - data:
+      entity_id: media_player.tv
+      language: en
+      message: Mahesh at home
+    service: tts.google_say
+  alias: mahesh_phone_detected
+  condition: []
+  id: '1517880637242'
+  trigger:
+  - entity_id: device_tracker.maheshs_iphone
+    from: home
+    platform: state
+    to: home
+
+- alias: Enable Arlo upton HA start
+  initial_state: 'on'
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: camera.enable_motion_detection
+    entity_id: camera.living_room_cam

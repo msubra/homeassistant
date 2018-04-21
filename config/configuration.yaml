@@ -1,0 +1,220 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret zone.latitude
+  longitude: !secret zone.longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 268
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Chicago
+  # Customization file
+  customize: !include customize.yaml
+  
+  packages: !include_dir_named packages
+
+
+python_script:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # api_password: !secret http_password
+  cors_allowed_origins:
+    - http://192.168.1.202:7080
+    - http://192.168.1.202:8123
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+  ignore:
+      - songpal
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+binary_sensor:
+  - platform: ring
+
+# Weather prediction
+sensor:
+  - platform: ring
+  - platform: pollen
+    zip_code: "78717"
+    monitored_conditions:
+      - allergy_average_forecasted
+      - allergy_average_historical
+      - allergy_index_today
+      - allergy_index_tomorrow
+      - allergy_index_yesterday
+      - disease_average_forecasted
+  - platform: nest
+    monitored_conditions:
+      - 'weather_temperature'
+      - 'weather_humidity'
+      - 'weather_condition'
+      - 'wind_speed'
+      - 'wind_direction'
+    
+# Text to speech
+tts:
+  - platform: google
+
+
+# Enables a map showing the location of tracked devices
+
+hassio:
+
+#Nest
+nest:
+  client_id: !secret nest.client_id
+  client_secret: !secret nest.client_secret
+  structure:
+    - Home
+
+#Climate
+climate:
+  platform: nest
+
+panel_iframe:
+  nodered:
+   title: 'Node-Red'
+   icon: 'mdi:shuffle-variant'
+   url: 'http://192.168.1.202:1880/'
+  cloud9:
+   title: 'Cloud9-IDE'
+   icon: 'mdi:shuffle-variant'
+   url: 'http://192.168.1.202:8321/ide.html'
+  controlpanel:
+    title: "Control Panel"
+    icon: 'mdi:tablet-ipad'
+    url: 'http://192.168.1.202:7080/'
+  terminal:
+    title: 'Terminal'
+    url: 'http://192.168.1.202:7681/'
+    icon: 'mdi:console'
+
+media_player:
+  - platform: cast
+  - platform: sonos
+  - platform: braviatv
+    host: 192.168.1.101
+
+
+media_extractor:
+
+ring:
+  username: !secret ring_username
+  password: !secret ring_password
+
+# Cloud  
+cloud:
+
+#z-wave
+zwave:
+  usb_path: /dev/ttyACM1
+
+#http://www.subnet-calculator.com/cidr.php
+device_tracker:
+  - platform: bluetooth_tracker
+  # - platform: tplink
+  #   host: 192.168.1.1
+  #   username: !secret tplink.username
+  #   password: !secret tplink.password
+  #   track_new_devices: yes
+  - platform: owntracks
+    max_gps_accuracy: 200
+  - platform: geofency
+  - platform: nmap_tracker
+    hosts: 
+      - 192.168.1.106
+      - 192.168.1.103
+    home_interval: 10
+    exclude:
+     - 192.168.1.0
+     - 192.168.1.1
+     - 192.168.1.202
+     
+speech:
+
+
+input_boolean:
+  away_mode:
+    initial: off
+    icon: 'mdi:beach'
+
+mqtt:
+  broker: core-mosquitto
+
+arlo:
+  username: !secret arlo.username
+  password: !secret arlo.password
+
+ffmpeg:
+
+camera:
+  - platform: ring
+  - platform: arlo
+    ffmpeg_arguments: '-pred 1 -q:v 2'
+
+emulated_hue:
+  type: alexa
+
+# rainbird:
+#   host: 192.168.1.109
+#   password: !secret rainbird.password
+
+# usps:
+#   username: !secret usps.username
+#   password: !secret usps.password
+
+vacuum:
+  - platform: xiaomi_miio
+    host: 192.168.1.107
+    token: !secret xiaomi.token
+
+cover:
+  - platform: myq
+    username: !secret liftmaster.username
+    password: !secret liftmaster.password
+    type: chamberlain
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky.api_key
+    name: Dark Sky
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+intent_script: !include intent_scripts.yaml

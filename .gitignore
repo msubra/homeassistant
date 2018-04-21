@@ -1,0 +1,17 @@
+secrets.yaml
+*/tts/*
+*.log
+*.sqlite
+*.db
+*.conf
+*.txt
+*.pyc
+core
+*.backup
+*.txt
+__pycache__
+.npm
+.node_repl_history
+logs
+config/homebridge/persist/*
+config/homebridge/accessories/cachedAccessories

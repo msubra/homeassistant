@@ -1,0 +1,3 @@
+switch.switch:
+  ignored: false
+  polling_intensity: 0

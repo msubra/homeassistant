@@ -1,0 +1,63 @@
+  default_view:
+    view: yes
+    icon: mdi:home
+    entities:
+      - weather.dark_sky
+      - group.weather_card_forecast
+      - group.weather
+      - group.health
+      - group.ring_doorbell
+      - group.Presence
+      - group.cameras
+      - group.switches
+      - group.doors__lights
+      - group.bots
+
+
+  Weather:
+    - sun.sun
+    - sensor.season
+    - sensor.dark_sky_humidity
+    - sensor.dark_sky_precip
+    - sensor.dark_sky_precip_probability
+    - sensor.dark_sky_uv_index
+    - sensor.dark_sky_visibility
+    - sensor.dark_sky_wind_speed
+
+  Health:
+    - sensor.cold__flu_forecasted_average
+    - sensor.allergy_index_today
+    - sensor.allergy_index_tomorrow
+    - sensor.allergy_index_forecasted_average
+
+  Ring Doorbell:
+    - binary_sensor.ring_front_door_ding
+    - binary_sensor.ring_front_door_motion
+    - sensor.ring_front_door_last_activity
+    - sensor.ring_front_door_last_ding
+    - sensor.ring_front_door_last_motion
+    - sensor.ring_front_door_battery
+    - camera.front_door
+
+  Cameras:
+    - camera.living_room_cam
+
+  mahesh_devices:
+    - device_tracker.1865908fef2a
+    - device_tracker.maheshs_iphone
+  geetha_devices:
+    - device_tracker.geethas_iphone
+    - device_tracker.2c3361287107
+    
+  Presence:
+    - device_tracker.1865908fef2a
+    - device_tracker.maheshs_iphone
+    - device_tracker.geethas_iphone
+    - device_tracker.2c3361287107
+  
+  Doors & Lights:
+    - switch.switch
+    - cover.home_garage_opener
+    
+  Bots:
+    - vacuum.xiaomi_vacuum_cleaner
