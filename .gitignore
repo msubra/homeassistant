@@ -13,5 +13,4 @@ __pycache__
 .npm
 .node_repl_history
 logs
-config/homebridge/persist/*
-config/homebridge/accessories/cachedAccessories
+homebridge
