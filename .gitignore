@@ -14,3 +14,5 @@ __pycache__
 .node_repl_history
 logs
 homebridge
+appdaemon.yaml
+entity_registry.yaml
