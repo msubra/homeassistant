@@ -58,6 +58,6 @@
   Doors & Lights:
     - switch.switch
     - cover.home_garage_opener
-    
+
   Bots:
     - vacuum.xiaomi_vacuum_cleaner

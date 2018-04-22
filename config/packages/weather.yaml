@@ -539,7 +539,7 @@ automation:
   trigger:
     #update every hour
     - platform: time
-      minutes: 30
+      minutes: 15
       seconds: 00
     #run when home assistant starts
     - platform: homeassistant

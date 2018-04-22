@@ -70,7 +70,7 @@ binary_sensor:
 sensor:
   - platform: ring
   - platform: pollen
-    zip_code: "78717"
+    zip_code: !secret home.zipcode
     monitored_conditions:
       - allergy_average_forecasted
       - allergy_average_historical
