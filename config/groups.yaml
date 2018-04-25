@@ -57,7 +57,15 @@
   
   Doors & Lights:
     - switch.switch
+    - switch.switch_2
+    - switch.switch_3
     - cover.home_garage_opener
 
   Bots:
     - vacuum.xiaomi_vacuum_cleaner
+
+## Hide these groups
+  evening_lights:
+    - switch.switch
+    - switch.switch_2
+    - switch.switch_3

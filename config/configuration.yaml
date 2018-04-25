@@ -142,7 +142,7 @@ cloud:
 
 #z-wave
 zwave:
-  usb_path: /dev/ttyACM1
+  usb_path: /dev/ttyACM0
 
 #http://www.subnet-calculator.com/cidr.php
 device_tracker:
@@ -157,9 +157,10 @@ device_tracker:
   - platform: geofency
   - platform: nmap_tracker
     hosts: 
-      - 192.168.1.106
-      - 192.168.1.103
+      - 192.168.1.207
+      - 192.168.1.205
     home_interval: 10
+    interval_seconds: 20
     exclude:
      - 192.168.1.0
      - 192.168.1.1
